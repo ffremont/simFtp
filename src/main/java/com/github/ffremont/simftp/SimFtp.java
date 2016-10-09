@@ -22,12 +22,16 @@ import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author florent
  */
 public class SimFtp {
+  
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimFtp.class);
     
     private static final String DEFAULT_AUTH = "admin:admin";
     private static final int DEFAULT_PORT = 2121;
@@ -35,7 +39,7 @@ public class SimFtp {
     public static void main(String[] args) throws FtpException {
         if (args.length > 0) {
             if ("help".equals(args[0])) {
-                System.out.println(new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("helper.txt")))
+                LOGGER.info(new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("helper.txt")))
                          .lines().collect(Collectors.joining("\n")));
                 return;
             }
@@ -46,7 +50,7 @@ public class SimFtp {
         int port = System.getProperty("port") != null ? Integer.valueOf(System.getProperty("port")) : DEFAULT_PORT;
         String[] splitAuth = auth.split(":");
         if(splitAuth.length != 2){
-            System.err.println("le format du paramètre 'auth' n'est pas valide, nomUtilisateur:motDePasse");
+            LOGGER.error("le format du paramètre 'auth' n'est pas valide, nomUtilisateur:motDePasse");
             return;
         }
         
@@ -71,10 +75,12 @@ public class SimFtp {
         try {
             userManager.save(user);//Save the user to the user list on the filesystem
         } catch (FtpException e1) {
+            LOGGER.error("oups, erreur interne", e1);
             e1.printStackTrace(System.err);
         }        
         factory.addListener("default", listenerFactory.createListener());
 
+        LOGGER.info("Démarrage du serveur sur le port {}, l'utilisateur habilité est {}", ""+port, splitAuth[0]);
         FtpServer server = factory.createServer();
         server.start();
     }
