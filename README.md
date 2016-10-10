@@ -1,4 +1,13 @@
-# SimFtp
+```rawtext
+ _______  ___   __   __  _______  _______  _______ 
+|       ||   | |  |_|  ||       ||       ||       |
+|  _____||   | |       ||    ___||_     _||    _  |
+| |_____ |   | |       ||   |___   |   |  |   |_| |
+|_____  ||   | |       ||    ___|  |   |  |    ___|
+ _____| ||   | | ||_|| ||   |      |   |  |   |    
+|_______||___| |_|   |_||___|      |___|  |___|   
+```
+
 Serveur FTP ultra simple !
 Vous choisissez uniquement pour le lancer le port, l'utilisateur et le répertoire.
 
