@@ -11,6 +11,10 @@
 Serveur FTP ultra simple !
 Vous choisissez uniquement pour le lancer le port, l'utilisateur et le répertoire.
 
+### Installation
+* Installer [Java 8 minimum](https://www.java.com/fr/download/)
+* Télécharger [le programme Java](https://drive.google.com/open?id=0B3RZ6sP4kUBAWUIwMWZrdWVqX28)
+
 ### Utilisation
 Syntaxe : java [-options] -jar xxxxx.jar
 
